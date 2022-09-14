@@ -9,7 +9,6 @@
         <div id="menu-icon">
             <v-app-bar-nav-icon @click="showMenu" ></v-app-bar-nav-icon>
         </div>
-
     </header>
     
 </template>
@@ -19,12 +18,9 @@
         name: 'AppHeader',
         methods: {
             showMenu(){
-                console.log(this.$store.state.showNav)
                 if(this.$store.state.showNav){
-                    console.log(1)
                     this.$store.commit('setShowNav', false);
                 }else{
-                    console.log(2)
                     this.$store.commit('setShowNav', true);
                 }
             },

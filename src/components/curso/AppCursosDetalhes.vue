@@ -21,7 +21,6 @@
 
 </template>
 <script>
-    console.log(this);
     import api from '../api/api';
     import Loading from '../loading/Loading.vue';
     import BackButton from '../navigation/BackButton.vue';
@@ -36,15 +35,11 @@
             };
         },
         created() {
-            console.log(this.$route.params.id_curso);
             let sql=`/curso/${this.$route.params.id_curso}`;
-            console.log(sql)
             this.get(`/curso/${this.$route.params.id_curso}`).then((response)=>{
                 this.curso = response.data;
-                console.log(this.curso);
             });
         },
     }
     let params=new URL(location.href).searchParams.get('id_curso');
-    
 </script>

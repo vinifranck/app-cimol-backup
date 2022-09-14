@@ -13,7 +13,7 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn text @click="detalhesCurso(curso.id_curso)">
-                                Ver mais
+                                Ver mais ...
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -51,7 +51,6 @@
             }
         }
     }
-    
     console.log(window.localStorage.perfil);
 
 </script>

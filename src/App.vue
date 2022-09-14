@@ -5,7 +5,7 @@
 
         <div id="content">
             <nav  v-if="$store.state.showNav">
-                <app-nav/>
+                <app-nav v-if="$store.state.logged"/>
             </nav>
             <main>
                 <v-content>

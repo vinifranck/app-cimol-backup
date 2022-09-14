@@ -11,12 +11,9 @@
 
                 <v-select
                     :items="items"
-                    label="Perfil"
                     v-model="perfil"
+                    label="Perfil"
                 ></v-select>
-
-                
-
                 <v-btn
                     depressed
                     dark
@@ -27,8 +24,6 @@
                 >
                     Definir perfil
                 </v-btn>
-
-                
             </v-col>
         </v-row>
     </v-container>
@@ -37,7 +32,7 @@
 <script>
     import api from '../api/api';
     import Loading from '../loading/Loading.vue';
-    
+
     export default {
         name: 'SetPerfilPage',
         components: { Loading},
@@ -49,12 +44,10 @@
         },
         methods: {
             setPerfil() {
-                console.log(this.perfil)
                 if (this.perfil) {
-                    window.localStorage.perfil=this.perfil;
+                    window.localStorage.perfil = this.perfil;
                     this.$store.commit('setPerfil', this.perfil);
                     this.$router.push('/');
-                  
                 } else {
                     this.$store.commit('showErrorMessage', 'O perfil informado não é válido.');
                 }
