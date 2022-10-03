@@ -3,6 +3,8 @@
 ## Project setup
 ```
 npm install
+* npm update 
+* npm install --save md5
 ```
 
 ### Compiles and hot-reloads for development
