@@ -58,9 +58,23 @@
             navActionClick(action) {
               if (action === "cursos") {
                 this.cursos();
+              } else if (action === "armarios") {
+                this.armarios();
+              } else if (action === "turmas") {
+                this.turmas();
               } else if (action === "logout") {
                 this.logout();
               }
+            },
+            armarios() {
+                let id_curso=null;
+                this.get(`/curso/coordenador/${this.$store.state.userId}`).then((response)=>{
+                  console.log(response.data);
+                  id_curso = response.data.id_curso;
+                  console.log(id_curso);
+                  this.$router.push('/curso/armarios/'+id_curso);
+                });
+                //this.$router.push('/curso/armarios/'+id_curso);
             },
             cursos() {
                 this.$router.push('/cursos');
@@ -68,29 +82,38 @@
             turmas() {
                 this.$router.push('/turmas');
             },
+            patimonios() {
+                this.$router.push('/patrimonios');
+            },
             logout() {
                 this.$store.commit('setAuthToken', '');
                 this.$store.commit('setUserId', '');
                 this.$store.commit('setUserNome', '');
                 //this.$store.commit('setUserEmail', '');
                 this.$store.commit('setLogged', false);
-                this.$router.push('/');
+                this.$router.push('/login');
                 //this.$router.push('/logout');
             },
         },
-    data: () => ({
-      selectedItem: 0,
-      items: [
-        { text: 'Cursos', icon: 'mdi-school', action:'cursos',perfil:'admin'},
-        { text: 'Turmas', icon: 'mdi-star', action:'turmas', perfil:'admin'},
-        { text: 'Alunos', icon: 'mdi-account-multiple' , action:'alunos', perfil:'admin, coordenador'},
-        { text: 'Armarios', icon: 'mdi-equal-box',  action:'armarios', perfil:'admin, coordenador'},
-        { text: 'Patrimonios', icon: 'mdi-check-circle',  action:'patrimonios', perfil:'admin, coordenador'},
-        { text: 'Biblioteca', icon: 'mdi-book',  action:'biblioteca', perfil:'admin, biblioteca'},
-        { text: 'Horarios', icon: 'mdi-border-all',  action:'Horarios', perfil:'admin, coordenador, professor,aluno'},
-        { text: 'Logout', icon: 'mdi-logout',  action:'logout', perfil:'admin, coordenador, professor,aluno, biblioteca'},
-      ],
-    }),
+    data() {
+      let perfil=this.$store.state.perfil;
+      let itens=new Array();
+      if(perfil=='admin'){
+        itens.push({ text: 'Cursos', icon: 'mdi-school', action:'cursos'});
+        itens.push({ text: 'Turmas', icon: 'mdi-star', action:'turmas'});
+      }else if(perfil=='admin' || perfil=='coordenador' ){
+        itens.push({ text: 'Alunos', icon: 'mdi-account-multiple' , action:'alunos'});
+        itens.push({ text: 'Armarios', icon: 'mdi-equal-box',  action:'armarios'});
+        itens.push({ text: 'Patrimônios', icon: 'mdi-equal-box',  action:'patrimonios'});
+      }else if(perfil=='admin' || perfil=='coordenador' || perfil=='professor' || perfil=='aluno'){
+        itens.push({ text: 'Horarios', icon: 'mdi-border-all',  action:'horarios'});
+      }
+      itens.push({ text: 'Logout', icon: 'mdi-logout',  action:'logout', perfil:'admin, coordenador, professor,aluno, biblioteca'});
+      return {
+        selectedItem: 0,
+        items: itens,
+      }
+    },
   }
 </script>
 <style>
