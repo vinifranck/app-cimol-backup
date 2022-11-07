@@ -65,6 +65,8 @@
               } else if (action === "logout") {
                 this.logout();
               }
+              this.$store.commit('setShowNav', false);
+              
             },
             armarios() {
                 let id_curso=null;

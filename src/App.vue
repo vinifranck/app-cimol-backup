@@ -47,12 +47,14 @@
     }
   
     nav{
+        position:absolute;
+        z-index:1;
         width:15vw;
         display:flex;
     }
 
     main{
-        width:70vw;
+        width:100vw;
         display:flex;
         margin-left:0vw;
     }

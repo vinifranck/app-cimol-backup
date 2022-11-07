@@ -44,7 +44,7 @@
         created() {
             console.log(this.$route.params.id_curso);
             let sql=`/curso/armarios/${this.$route.params.id_curso}`;
-            console.log(sql)
+            
             this.get(`/curso/armarios/${this.$route.params.id_curso}`).then((response)=>{
                 this.armarios = response.data;
             });
