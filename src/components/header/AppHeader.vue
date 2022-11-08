@@ -36,11 +36,15 @@
 header{
     display:flex;
     width:100vw;
-    height:10vh;
+    height:12vh;
     background-color:#999;
-    border-bottom:1px solid #2062AD; 
+    border-bottom:2px solid #2062AD; 
+    border-top:2px solid #FFD700;
     padding:1vh;
     justify-content:start;
+ }
+ .v-list{
+    border-bottom:2px solid #FFD700; 
  }
  
  #logo{
