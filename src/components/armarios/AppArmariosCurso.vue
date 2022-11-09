@@ -7,13 +7,13 @@
                 <v-col
                 v-for="armario in armarios"
                 :key="armario.id_armario"
-                :cols="armario.numero"
+                
                 >
-                    <v-card>
+                    <v-card color="green">
                         <v-card-title v-text="armario.numero"></v-card-title>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn text @click="detalhesArmario(armario.id_curso, armario.id_armario)">
+                            <v-btn text @click="detalhesArmario(armario.id_armario)">
                                 Ver mais ...
                             </v-btn>
                         </v-card-actions>
@@ -50,10 +50,22 @@
             });
         },
         methods:{
-            detalhesArmario(id_curso, id_armario){
-               // this.$router.push("/curso/armario/"+id_curso+"/"+id_armario);
+            detalhesArmario(id_armario){
+               this.$router.push("/curso/armario/"+this.$route.params.id_curso+"/"+id_armario);
             }
         }
     }
     let params=new URL(location.href).searchParams.get('id_curso');
 </script>
+
+<style>
+    .v-col{
+        display:grid;
+        row-gap: 10px;
+        grid-template-columns:auto auto auto auto auto auto;
+    }
+
+   
+
+
+</style>
