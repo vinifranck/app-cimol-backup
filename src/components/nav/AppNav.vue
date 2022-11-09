@@ -60,7 +60,9 @@
                 this.home();
               } else if (action === "cursos") {
                 this.cursos();
-              } else if (action === "armarios") {
+              } else if (action === "alunos") {
+                this.alunos();
+              }else if (action === "armarios") {
                 this.armarios();
               } else if (action === "turmas") {
                 this.turmas();
@@ -82,6 +84,9 @@
                   this.$router.push('/curso/armarios/'+id_curso);
                 });
                 //this.$router.push('/curso/armarios/'+id_curso);
+            },
+            alunos() {
+              this.$router.push('/alunos');
             },
             cursos() {
                 this.$router.push('/cursos');
@@ -107,7 +112,9 @@
       let itens=new Array();
       itens.push({ text: 'Home', icon: 'mdi-home',  action:'home', perfil:'admin, coordenador, professor,aluno, biblioteca'});
       if(perfil=='admin'){
+        itens.push({ text: 'Alunos', icon: 'mdi-account-multiple' , action:'alunos'});
         itens.push({ text: 'Cursos', icon: 'mdi-school', action:'cursos'});
+        itens.push({ text: 'Horarios', icon: 'mdi-border-all',  action:'horarios'});
         itens.push({ text: 'Turmas', icon: 'mdi-star', action:'turmas'});
       }else if(perfil=='admin' || perfil=='coordenador' ){
         itens.push({ text: 'Alunos', icon: 'mdi-account-multiple' , action:'alunos'});
@@ -126,6 +133,6 @@
 </script>
 <style>
   .v-list{
-    border-bottom:2px solid #FFD700; 
+     border-bottom:2px solid #FFD700; 
  }
 </style>

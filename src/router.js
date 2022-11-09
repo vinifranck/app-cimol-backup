@@ -7,6 +7,7 @@ import SetPerfilPage from './components/login/SetPerfilPage.vue';
 import Cursos from './components/curso/AppCursos.vue';
 import CursosDetalhes from './components/curso/AppCursosDetalhes.vue';
 import ArmariosCurso from './components/armarios/AppArmariosCurso.vue';
+import Alunos from './components/alunos/AppAlunos.vue';
 
 Vue.use(Router);
 
@@ -18,6 +19,7 @@ const routes = [
     { path: '/cursos', name: 'cursos', component: Cursos },
     { path: '/curso/:id_curso', name: 'cursosDetalhes', component: CursosDetalhes },
     { path: '/curso/armarios/:id_curso', name: 'armariosCurso', component: ArmariosCurso },
+    { path: '/alunos', name: 'alunos', component: Alunos },
 ];
 
 export default new Router({

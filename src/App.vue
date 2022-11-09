@@ -49,9 +49,10 @@
     nav{
         position:absolute;
         z-index:1;
-        width:15vw;
+        width:20vw;
         display:flex;
     }
+   
 
     main{
         width:100vw;

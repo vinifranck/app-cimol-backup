@@ -3,120 +3,25 @@
         
         <v-container fluid>
             <v-row dense>
-                <v-col>
+                <v-col v-for="(item, i) in items"
+                     :key="i" 
+                    @click="homeActionClick(item.action)">
                     <v-card>
                         <v-card-title>
                             <v-list-item-icon>
-                                <v-icon>mdi-school</v-icon>
+                                <v-icon v-text="item.icon"></v-icon>
                             </v-list-item-icon>
                         </v-card-title>
                         <v-card-actions>
                             <v-btn
-                                color="deep-purple lighten-2"
-                                text
-                                @click="cursos"
-                            >
-                                Cursos
+                                v-text="item.text"
+                            >                                
                             </v-btn>
                         </v-card-actions>
                     </v-card>
                     
                 </v-col>
-                <v-col>
-                    <v-card>
-                        <v-card-title>
-                            <v-list-item-icon>
-                                <v-icon>mdi-account-multiple</v-icon>
-                            </v-list-item-icon>
-                        </v-card-title>
-                        <v-card-actions>
-                            <v-btn
-                                color="deep-purple lighten-2"
-                                text
-                                @click="reserve"
-                            >
-                                Alunos
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                    
-                </v-col>
-                <v-col>
-                     <v-card>
-                        <v-card-title>
-                            <v-list-item-icon>
-                                <v-icon>mdi-book</v-icon>
-                            </v-list-item-icon>
-                        </v-card-title>
-                        <v-card-actions>
-                            <v-btn
-                                color="deep-purple lighten-2"
-                                text
-                                @click="reserve"
-                            >
-                                Biblioteca
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                    
-                </v-col>
-                <v-col>
-                    <v-card>
-                        <v-card-title>
-                            <v-list-item-icon>
-                                <v-icon>mdi-equal-box</v-icon>
-                            </v-list-item-icon>
-                        </v-card-title>
-                        <v-card-actions>
-                            <v-btn
-                                color="deep-purple lighten-2"
-                                text
-                                @click="reserve"
-                            >
-                                Armários
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                    
-                </v-col>
-                <v-col>
-                    <v-card>
-                        <v-card-title>
-                            <v-list-item-icon>
-                                <v-icon>mdi-equal-box</v-icon>
-                            </v-list-item-icon>
-                        </v-card-title>
-                        <v-card-actions>
-                            <v-btn
-                                color="deep-purple lighten-2"
-                                text
-                                @click="reserve"
-                            >
-                                Patrimonio
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                    
-                </v-col>
-                <v-col>
-                    <v-card>
-                        <v-card-title>
-                            <v-list-item-icon>
-                                <v-icon>mdi-calendar</v-icon>
-                            </v-list-item-icon>
-                        </v-card-title>
-                        <v-card-actions>
-                            <v-btn
-                                color="deep-purple lighten-2"
-                                text
-                                @click="h"
-                            >
-                                Horários
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                    
-                </v-col>
+                
 
             </v-row>
         </v-container>
@@ -132,10 +37,65 @@
             name: 'HomePage',
             components: { Loading},
             mixins: [api],
+            
             methods: {
-                cursos() {
-                    this.$router.push('/cursos');
-                }
+            homeActionClick(action) {
+              if (action === "home") {
+                this.home();
+              } else if (action === "cursos") {
+                this.cursos();
+              } else if (action === "armarios") {
+                this.armarios();
+              } else if (action === "turmas") {
+                this.turmas();
+              } else if (action === "logout") {
+                this.logout();
+              }
+              this.$store.commit('setShowNav', false);
+              
+            },
+            home() {
+                this.$router.push('/');
+            },
+            armarios() {
+                let id_curso=null;
+                this.get(`/curso/coordenador/${this.$store.state.userId}`).then((response)=>{
+                  console.log(response.data);
+                  id_curso = response.data.id_curso;
+                  console.log(id_curso);
+                  this.$router.push('/curso/armarios/'+id_curso);
+                });
+                //this.$router.push('/curso/armarios/'+id_curso);
+            },
+            cursos() {
+                this.$router.push('/cursos');
+            },
+            turmas() {
+                this.$router.push('/turmas');
+            },
+            patimonios() {
+                this.$router.push('/patrimonios');
             }
+        },
+            data() {
+                let perfil=this.$store.state.perfil;
+                let itens=new Array();
+               
+                if(perfil=='admin'){
+                    itens.push({ text: 'Cursos', icon: 'mdi-school', action:'cursos'});
+                    itens.push({ text: 'Turmas', icon: 'mdi-star', action:'turmas'});
+                }else if(perfil=='admin' || perfil=='coordenador' ){
+                    itens.push({ text: 'Alunos', icon: 'mdi-account-multiple' , action:'alunos'});
+                    itens.push({ text: 'Armarios', icon: 'mdi-equal-box',  action:'armarios'});
+                    itens.push({ text: 'Patrimônios', icon: 'mdi-equal-box',  action:'patrimonios'});
+                     itens.push({ text: 'Horarios', icon: 'mdi-border-all',  action:'horarios'});
+                }else if(perfil=='admin' || perfil=='coordenador' || perfil=='professor' || perfil=='aluno'){
+                    itens.push({ text: 'Horarios', icon: 'mdi-border-all',  action:'horarios'});
+                }
+                return {
+                    selectedItem: 0,
+                    items: itens,
+                }
+            },
         }
     </script>
