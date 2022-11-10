@@ -7,9 +7,9 @@
                 <v-col
                 v-for="armario in armarios"
                 :key="armario.id_armario"
-                
+                :color="armario.cor"
                 >
-                    <v-card color="green">
+                    <v-card color="armario.cor">
                         <v-card-title v-text="armario.numero"></v-card-title>
                         <v-card-actions>
                             <v-spacer></v-spacer>

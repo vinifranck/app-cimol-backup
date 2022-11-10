@@ -6,8 +6,26 @@
             <v-row dense>
                 <v-col>
                     <v-card>
-                        <v-card-title>
+
+                        <div class="text-overline mb-4">
+                            {{armario.txLocado}}
+                        </div>
+                        
+                        
+
+                        
+                        <v-card-title>Armário {{armario.numero}}
+                            
                         </v-card-title>
+                         
+                        <v-list-item-subtitle>{{armario.local}}</v-list-item-subtitle>
+
+                        <v-card-actions>
+                            <v-btn text>
+                                EDITAR ARMÁRIO
+                            </v-btn>
+                        </v-card-actions>
+
                     </v-card>
                 </v-col>
             </v-row>
@@ -21,10 +39,24 @@
     import Loading from '../loading/Loading.vue';
     import BackButton from '../navigation/BackButton.vue';
     export default {
-        name: 'AppCursoDetalhes',
+        name: 'AppArmariosCursoDetalhes',
         components: { Loading, BackButton},
         mixins: [api],
-        
+        data(){
+            return{
+                searchOnGoing: false,
+                armario: {},
+               
+            };
+        },
+        created(){
+            //let sql=`/curso/armarios/${this.$route.params.id_armario}`;
+            this.get(`/curso/armarios/busca/${this.$route.params.id_armario}`).then((response)=>{
+                
+                             
+                this.armario = response.data[0];
+            });
+        },
     }
-    let params=new URL(location.href).searchParams.get('id_curso');
+    let params=new URL(location.href).searchParams.get('id_armario');
 </script>
