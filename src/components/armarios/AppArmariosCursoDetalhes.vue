@@ -19,7 +19,10 @@
                         </v-card-title>
                          
                         <v-list-item-subtitle>{{armario.local}}</v-list-item-subtitle>
-
+                         <hr/>
+                        <div v-if="armario.locado>0">
+                            Dados do aluno
+                        </div>
                         <v-card-actions>
                             <v-btn text>
                                 EDITAR ARMÁRIO
