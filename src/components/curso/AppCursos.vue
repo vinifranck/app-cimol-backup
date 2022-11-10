@@ -51,6 +51,5 @@
             }
         }
     }
-    console.log(window.localStorage.perfil);
 
 </script>

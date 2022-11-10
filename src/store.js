@@ -49,7 +49,6 @@ export default new Vuex.Store({
             state.logged = payload;
         },
         setShowNav(state, payload) {
-            console.log(3);
             window.localStorage.showNav = payload;
             state.showNav = payload;
         },

@@ -7,11 +7,10 @@
             <nav  v-if="$store.state.showNav">
                 <app-nav v-if="$store.state.logged"/>
             </nav>
-            <main>
-                <v-content>
+
+                <v-main>
                     <router-view />
-                </v-content>
-            </main>    
+                </v-main>   
         </div>  
         <feedback />
     </v-app>

@@ -39,8 +39,8 @@
         mixins: [api],
         data() {
             return {
-                items: window.localStorage.userPerfils.split(","),
-            }
+                items: window.localStorage.userPerfils.split(','),
+            };
         },
         methods: {
             setPerfil() {

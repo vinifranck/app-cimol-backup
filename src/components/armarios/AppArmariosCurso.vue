@@ -50,10 +50,10 @@
             });
         },
         methods:{
-            detalhesArmario(id_curso, id_armario){
-               // this.$router.push("/curso/armario/"+id_curso+"/"+id_armario);
-            }
-        }
-    }
-    let params=new URL(location.href).searchParams.get('id_curso');
+            detalhesArmario(id_curso, id_armario) {
+                // this.$router.push("/curso/armario/"+id_curso+"/"+id_armario);
+            },
+        },
+    };
+    const params = new URL(location.href).searchParams.get('id_curso');
 </script>
