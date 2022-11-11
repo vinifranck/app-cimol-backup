@@ -22,10 +22,14 @@
                          <hr/>
                         <div v-if="armario.locado>0">
                             Dados do aluno
+                            <p>{{armario.aluno.nome}}</p>
                         </div>
                         <v-card-actions>
-                            <v-btn text>
-                                EDITAR ARMÁRIO
+                            <v-btn text v-if="armario.locado>0" @click="devolverArmario(armario.id_armario, armario.aluno.id_aluno)" >
+                                DEVOLVER
+                            </v-btn>
+                            <v-btn text v-if="armario.locado===0">
+                                LOCAR
                             </v-btn>
                         </v-card-actions>
 
@@ -52,6 +56,13 @@
                
             };
         },
+        methods:{
+            devolverArmario(id_armario, id_aluno){                
+                    this.post(`/curso/armarios/devolver/${id_armario}`,{id_armario: id_armario, id_aluno:id_aluno  });
+                    this.$router.push("/curso/armarios/"+this.$route.params.id_curso+"/"+id_armario);
+                },
+            },
+        
         created(){
             //let sql=`/curso/armarios/${this.$route.params.id_armario}`;
             this.get(`/curso/armarios/busca/${this.$route.params.id_armario}`).then((response)=>{
