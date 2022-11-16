@@ -7,7 +7,7 @@ import SetPerfilPage from './components/login/SetPerfilPage.vue';
 import Cursos from './components/curso/AppCursos.vue';
 import CursosDetalhes from './components/curso/AppCursosDetalhes.vue';
 import ArmariosCurso from './components/armarios/AppArmariosCurso.vue';
-import sim from './components/patrimonios/uuu.vue';
+import sim from './components/patrimonios/simmmmm.vue';
 import Patrimonios from './components/patrimonios/AppPatrimonios.vue';
 
 Vue.use(Router);

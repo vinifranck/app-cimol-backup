@@ -68,7 +68,7 @@
                 this.turmas();
               } else if (action === "patrimonios") {
                 this.patrimonios();
-              }else if (action === "logout") {
+              } else if (action === "logout") {
                 this.logout();
               }
               this.$store.commit('setShowNav', false);
@@ -118,10 +118,9 @@
         itens.push({ text: 'Cursos', icon: 'mdi-school', action:'cursos'});
         itens.push({ text: 'Horarios', icon: 'mdi-border-all',  action:'horarios'});
         itens.push({ text: 'Turmas', icon: 'mdi-star', action:'turmas'});
-        itens.push({ text: 'Patrimônios', icon: 'mdi-laptop',  action:'patrimonio'});
       }else if(perfil=='admin' || perfil=='coordenador' ){
         itens.push({ text: 'Alunos', icon: 'mdi-account-multiple' , action:'alunos'});
-        itens.push({ text: 'Armários', icon: 'mdi-file-cabinet',  action:'armarios'});
+        itens.push({ text: 'Armarios', icon: 'mdi-file-cabinet',  action:'armarios'});
         itens.push({ text: 'Patrimônios', icon: 'mdi-bank',  action:'patrimonios'});
       }else if(perfil=='admin' || perfil=='coordenador' || perfil=='professor' || perfil=='aluno'){
         itens.push({ text: 'Horarios', icon: 'mdi-border-all',  action:'horarios'});

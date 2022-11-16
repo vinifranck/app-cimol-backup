@@ -9,6 +9,7 @@
         <div id="menu-icon">
             <v-app-bar-nav-icon @click="showMenu" ></v-app-bar-nav-icon>
         </div>
+            
     </header>
     
 </template>
