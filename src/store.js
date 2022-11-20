@@ -12,7 +12,11 @@ export default new Vuex.Store({
         userPerfils: '',
         perfil: '',
         logged: false,
+<<<<<<< HEAD
         showNav: true,
+=======
+        showNav:false,
+>>>>>>> 442e6f777c7eab78ce98d5607b970b7fa29d0a4e
         message: {
             text: '',
             type: '',

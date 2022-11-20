@@ -35,13 +35,25 @@
 header{
     display:flex;
     width:100vw;
-    height:10vh;
+    height:12vh;
     background-color:#999;
+<<<<<<< HEAD
     border-bottom:1px solid #2062AD;
     padding:1vh;
     justify-content:start;
  }
 
+=======
+    border-bottom:2px solid #2062AD; 
+    border-top:2px solid #FFD700;
+    padding:1vh;
+    justify-content:start;
+ }
+ .v-list{
+    border-bottom:2px solid #FFD700; 
+ }
+ 
+>>>>>>> 442e6f777c7eab78ce98d5607b970b7fa29d0a4e
  #logo{
     display:flex;
     width:20vw;
