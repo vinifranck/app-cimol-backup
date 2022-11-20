@@ -127,6 +127,7 @@
             },
             patrimonios() {
                 this.$router.push('/patrimonio');
+                
             },
             logout() {
                 this.$store.commit('setAuthToken', '');

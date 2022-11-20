@@ -12,6 +12,7 @@ import Patrimonios from './components/patrimonios/AppPatrimonios.vue';
 
 Vue.use(Router);
 
+
 const routes = [
     { path: '/', name: 'home', component: HomePage },
     { path: '/login', name: 'login', component: LoginPage },

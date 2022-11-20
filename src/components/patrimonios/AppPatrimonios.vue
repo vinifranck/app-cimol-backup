@@ -153,7 +153,6 @@ export default {
             ],
             imagePath: "",
 
-
         };
     },
     computed: {
