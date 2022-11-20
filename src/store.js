@@ -7,12 +7,12 @@ export default new Vuex.Store({
     state: {
         authToken: '',
         userId: '',
-        userNome:'',
+        userNome: '',
         userEmail: '',
-        userPerfils:'',
+        userPerfils: '',
         perfil: '',
         logged: false,
-        showNav:true,
+        showNav: true,
         message: {
             text: '',
             type: '',

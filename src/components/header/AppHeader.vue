@@ -1,49 +1,47 @@
 <template>
     <header>
         <div id="logo">
-            <img src="https://cimol.g12.br/images/logo-colorful.svg" />
+            <img src="https://cimol.g12.br/images/logo-colorful.svg">
         </div>
         <div id="title">
             <h1>ESCOLA TÉCNICA ESTADUAL MONTEIRO LOBATO</h1>
         </div>
         <div id="menu-icon">
-            <v-app-bar-nav-icon @click="showMenu" ></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon @click="showMenu" />
         </div>
-            
     </header>
-    
 </template>
 
 <script>
     export default {
         name: 'AppHeader',
         methods: {
-            showMenu(){
-                if(this.$store.state.showNav){
+            showMenu() {
+                if (this.$store.state.showNav) {
                     this.$store.commit('setShowNav', false);
-                }else{
+                } else {
                     this.$store.commit('setShowNav', true);
                 }
             },
         },
-    }
+    };
 </script>
 
 <style scoped>
 *{
     color:#2062AD;
 }
- 
+
 header{
     display:flex;
     width:100vw;
     height:10vh;
     background-color:#999;
-    border-bottom:1px solid #2062AD; 
+    border-bottom:1px solid #2062AD;
     padding:1vh;
     justify-content:start;
  }
- 
+
  #logo{
     display:flex;
     width:20vw;

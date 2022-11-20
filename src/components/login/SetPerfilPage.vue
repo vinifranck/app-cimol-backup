@@ -10,10 +10,10 @@
                 <h6 class="display-1 text-uppercase">Perfil</h6>
 
                 <v-select
-                    :items="items"
                     v-model="perfil"
+                    :items="items"
                     label="Perfil"
-                ></v-select>
+                />
                 <v-btn
                     depressed
                     dark
@@ -35,7 +35,7 @@
 
     export default {
         name: 'SetPerfilPage',
-        components: { Loading},
+        components: { Loading },
         mixins: [api],
         data() {
             return {

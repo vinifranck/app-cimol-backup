@@ -1,17 +1,16 @@
 <template>
     <v-app>
-        
-        <app-header v-if="$store.state.logged"/>
+        <app-header v-if="$store.state.logged" />
 
         <div id="content">
-            <nav  v-if="$store.state.showNav">
-                <app-nav v-if="$store.state.logged"/>
+            <nav v-if="$store.state.showNav">
+                <app-nav v-if="$store.state.logged" />
             </nav>
 
-                <v-main>
-                    <router-view />
-                </v-main>   
-        </div>  
+            <v-main>
+                <router-view />
+            </v-main>
+        </div>
         <feedback />
     </v-app>
 </template>
@@ -21,9 +20,10 @@
     import AppHeader from './components/header/AppHeader.vue';
     import AppNav from './components/nav/AppNav.vue';
     import Feedback from './components/feedback/Feedback.vue';
+
     export default {
         name: 'App',
-        components: {AppNav, AppHeader, Feedback },
+        components: { AppNav, AppHeader, Feedback },
         mixins: [apiConfig],
         created() {
             this.createInterceptors();
@@ -44,7 +44,7 @@
     #content{
         display:flex;
     }
-  
+
     nav{
         width:15vw;
         display:flex;
@@ -55,5 +55,5 @@
         display:flex;
         margin-left:0vw;
     }
-    
+
 </style>

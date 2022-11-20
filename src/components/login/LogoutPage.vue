@@ -24,19 +24,19 @@
 <script>
     import api from '../api/api';
     import Loading from '../loading/Loading.vue';
-    
+
     export default {
         name: 'LogoutPage',
-        components: {Loading},
+        components: { Loading },
         mixins: [api],
         methods: {
-            logout(){
+            logout() {
                 this.$store.commit('setAuthToken', response.data.token);
                 this.$store.commit('setUserId', '');
                 this.$store.commit('setUserNome', '');
-                 this.$store.commit('setUserPerfils', '');
+                this.$store.commit('setUserPerfils', '');
                 this.$store.commit('setLogged', true);
                 this.$router.push('/');
             },
-        }
-    }
+        },
+    };
