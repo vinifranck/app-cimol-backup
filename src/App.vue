@@ -51,7 +51,7 @@
         width:20vw;
         display:flex;
     }
-   
+
 
     main{
         width:100vw;

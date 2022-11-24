@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <h1>Cursos</h1>
-        <hr/>
+        <hr>
         <v-container fluid>
             <v-row dense>
                 <v-col
