@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-app class="mr-7">
+        <v-app class="mr-7 mb-0"  >
             <v-main class="container align-center mt-0">
                 <v-toolbar flat>
                     <v-toolbar-title>Movimentações</v-toolbar-title>
@@ -14,18 +14,22 @@
                         :footer-props="{ 'items-per-page-text': 'Itens por página' }" class="elevation-1">
                     </v-data-table>
                 </v-card>
+                <back-button />
             </v-main>
         </v-app>
     </v-container>
 </template>
 <script>
-import axios from "axios";
+import BackButton from "../navigation/BackButton.vue";
 import api from "../api/api";
 import axiosInstance from "../api/apiInstance";
 
 export default {
     name: "appMovimentos",
     mixins: [api],
+    components: {
+        BackButton,
+    },
     data() {
         return {
             headers: [

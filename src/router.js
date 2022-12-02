@@ -21,7 +21,7 @@ const routes = [
     { path: '/cursos', name: 'cursos', component: Cursos },
     { path: '/curso/:id_curso', name: 'cursosDetalhes', component: CursosDetalhes },
     { path: '/curso/armarios/:id_curso', name: 'armariosCurso', component: ArmariosCurso },
-    { path: '/patrimonio', name: 'patrimonios', component: Patrimonios },
+    { path: '/patrimonios', name: 'patrimonios', component: Patrimonios },
     { path: '/patrimonios/movimentos', name: 'movimentos', component: Movimento },
 ];
 
