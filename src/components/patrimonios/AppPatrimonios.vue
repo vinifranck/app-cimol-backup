@@ -150,7 +150,7 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-                    <v-dialog v-model="dialogMoviment" max-width="700px">
+                    <v-dialog v-model="dialogMoviment" max-width="800px">
                         <v-card>
                             <template v-slot:activator="{ on }">
                                 <div class="d-flex" v-on="on"></div>
@@ -158,14 +158,14 @@
                             <v-card-title> <span class="headline">Movimentar</span></v-card-title>
                             <v-card-text>
                                 <v-row>
-                                    <v-col cols="10" sm="6" md="3">
+                                    <v-col cols="10" sm="6" md="4">
                                         <v-text-field
-                                            v-model="itemToMoviment.descricao"
+                                            v-model="itemToMoviment.desc"
                                             :rules="regra"
                                             label="Descrição"
                                         />
                                     </v-col>
-                                    <v-col cols="10" sm="6" md="3">
+                                    <v-col cols="10" sm="6" md="4">
                                         <v-menu
                                             ref="menu1"
                                             v-model="menu1"
@@ -193,7 +193,7 @@
                                             </v-date-picker>
                                         </v-menu>
                                     </v-col>
-                                    <v-col cols="10" sm="6" md="3">
+                                    <v-col cols="10" sm="6" md="4">
                                         <v-select
                                             v-model="
                                                 itemToMoviment.patrimonio_tipo_movimento_id_patrimonio_tipo_movimento
@@ -203,7 +203,15 @@
                                             :rules="regra"
                                         />
                                     </v-col>
-                                    <v-col cols="10" sm="4" md="3">
+                                    <v-col cols="10" sm="6" md="4">
+                                        <v-select
+                                            v-model="itemToMoviment.categoria"
+                                            :items="categoriaPat"
+                                            label="Categoria"
+                                            :rules="regra"
+                                        />
+                                    </v-col>
+                                    <v-col cols="10" sm="4" md="4">
                                         <v-text-field
                                             v-model="itemToMoviment.id_patrimonio_item"
                                             :rules="regra"
@@ -275,6 +283,8 @@ export default {
                 { text: "Empréstimo", value: "5" },
                 { text: "Desmonte", value: "6" },
             ],
+            categoriaPat: [],
+            seleciona: null,
         };
     },
     computed: {
@@ -284,30 +294,12 @@ export default {
     },
     mounted(){
         this.carrega();
-    },
-    watch: {
-        dialog(val) {
-            val || this.close();
-        },
-        dialogDelete(val) {
-            val || this.closeDelete();
-        },
-        date(val) {
-            this.dateFormatted = this.formatDate(this.date);
-        },
+        this.categoriaPatrimonio();
     },
     methods: {
-       /* doSearch() {
-            (this.items = []),
-                this.get(`/curso/patrimonio/buscar/${this.textSearch}`).then((response) => {
-                    console.log(response);
-                    this.items = response.data;
-                    this.carrega();
-                });
-        },*/
         deleta(item) {
             const url = `/curso/patrimonio/remover/${item.id_patrimonio_item}`;
-            axiosInstance
+            this
                 .delete(url)
                 .then((res) => {
                     this.carrega();
@@ -341,7 +333,7 @@ export default {
             if (item.id_patrimonio_item) {
                 this.altera(item, imagePath);
             } else {
-                axiosInstance
+                this
                     .post(`/curso/patrimonio/criarPatrimonio`, data)
                     .then((res) => {
                         this.carrega();
@@ -352,12 +344,24 @@ export default {
                     });
             }
         },
+        categoriaPatrimonio(){
+            this.categoriaPat = [];
+            this
+                .get(`/curso/patrimonio/categoria`)
+                .then((res) => {
+                    console.log(res);
+                    this.categoriaPat = res.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
         movimenta(item) {
             const data = {
                 ...item,
                 date: this.dateFormatted,
             };
-            axiosInstance
+            this
                 .post(`/curso/patrimonio/movimentacao/${item.id_patrimonio_item}`, data)
                 .then((res) => {
                     this.movimentos();
@@ -398,17 +402,6 @@ export default {
                     console.log(err);
                 });
         },
-        filtraCurso() {
-            axiosInstance
-                .get(`/curso/patrimonio/lista/${item.id_curso}`)
-                .then((response) => {
-                    this.cursos = response.data;
-                    this.carrega();
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
         movimentos() {
             this.$router.push(`/patrimonios/movimentos`);
         },
@@ -432,7 +425,7 @@ export default {
         },
         carregaMov() {
             this.items = [];
-            axiosInstance
+            this
                 .get("/curso/patrimonio/movimentacao")
                 .then((response) => {
                     this.items = response.data;
