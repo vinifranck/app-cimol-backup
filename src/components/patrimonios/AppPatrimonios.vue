@@ -175,19 +175,17 @@
                                         >
                                             <template v-slot:activator="{ on, attrs }">
                                                 <v-text-field
-                                                    v-model="dateFormatted"
+                                                    v-model="date"
                                                     readonly
                                                     label="Data"
                                                     persistent-hint
                                                     v-bind="attrs"
-                                                    @blur="date = parseDate(dateFormatted)"
                                                     v-on="on"
                                                 >
                                                 </v-text-field>
                                             </template>
                                             <v-date-picker
-                                                v-model="date"
-                                                no-title
+                                                v-model="itemToMoviment.date"
                                                 @input="menu1 = false"
                                             >
                                             </v-date-picker>
@@ -196,17 +194,21 @@
                                     <v-col cols="10" sm="6" md="4">
                                         <v-select
                                             v-model="
-                                                itemToMoviment.patrimonio_tipo_movimento_id_patrimonio_tipo_movimento
+                                            itemToMoviment.id_patrimonio_tipo_movimento
                                             "
                                             :items="tiposMovimentacao"
+                                            item-text="nome"
+                                            item-value="id_patrimonio_tipo_movimento"
                                             label="Tipo Movimentação"
                                             :rules="regra"
                                         />
                                     </v-col>
                                     <v-col cols="10" sm="6" md="4">
                                         <v-select
-                                            v-model="itemToMoviment.categoria"
+                                            v-model="itemToMoviment.id_categoria"
                                             :items="categoriaPat"
+                                            item-text="nome_categoria"
+                                            item-value="id_categoria"
                                             label="Categoria"
                                             :rules="regra"
                                         />
@@ -269,20 +271,13 @@ export default {
             dialogMoviment: false,
             itemToEdit: [],
             itemToMoviment: [],
-            date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString(),
+            date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             dateFormatted: "",
             itemToDelete: [],
             imagePath: "",
             menu1: false,
             regra: [(v) => !!v || "Campo obrigatório"],
-            tiposMovimentacao: [
-                { text: "Realocação", value: "1" },
-                { text: "Descarte", value: "2" },
-                { text: "Manutenção", value: "3" },
-                { text: "Entrada", value: "4" },
-                { text: "Empréstimo", value: "5" },
-                { text: "Desmonte", value: "6" },
-            ],
+            tiposMovimentacao: [],
             categoriaPat: [],
             seleciona: null,
         };
@@ -295,6 +290,7 @@ export default {
     mounted(){
         this.carrega();
         this.categoriaPatrimonio();
+        this.carregaTipoMov();
     },
     methods: {
         deleta(item) {
@@ -349,8 +345,19 @@ export default {
             this
                 .get(`/curso/patrimonio/categoria`)
                 .then((res) => {
-                    console.log(res);
-                    this.categoriaPat = res.data;
+                    this.categoriaPat = res.data.patrimonio;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        carregaTipoMov(){
+            this.tiposMovimentacao = [];
+            this
+                .get(`/curso/patrimonio/tipoMov`)
+                .then((res) => {
+
+                    this.tiposMovimentacao = res.data.patrimonio;
                 })
                 .catch((err) => {
                     console.log(err);
@@ -359,8 +366,9 @@ export default {
         movimenta(item) {
             const data = {
                 ...item,
-                date: this.dateFormatted,
+                date: this.date,
             };
+            console.log(data)
             this
                 .post(`/curso/patrimonio/movimentacao/${item.id_patrimonio_item}`, data)
                 .then((res) => {

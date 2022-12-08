@@ -19,6 +19,7 @@
         </v-app>
     </v-container>
 </template>
+
 <script>
 import BackButton from "../navigation/BackButton.vue";
 import api from "../api/api";
